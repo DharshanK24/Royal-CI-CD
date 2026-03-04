@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #111;
+    color: white;
+}
+
+/* Header */
+header {
+    position: fixed;
+    width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.logo {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    color: #e10600;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #e10600;
+}
+
+/* Hero */
+.hero {
+    height: 100vh;
+    background: url('assets/hero.jpg') center/cover no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 100px;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 70px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.hero button {
+    padding: 15px 40px;
+    border: none;
+    background: #333;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.hero button:hover {
+    background: #e10600;
+}
+
+/* Explore Section */
+.explore-section {
+    padding: 150px 100px;
+    text-align: center;
+    background: #1a1a1a;
+}
+
+.explore-section h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+footer {
+    padding: 30px;
+    text-align: center;
+    background: #000;
+}
