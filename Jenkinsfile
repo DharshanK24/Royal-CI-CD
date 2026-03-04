@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "roadster-website"
         CONTAINER_NAME = "roadster-container"
-        HOST_PORT = "8081"     // change if needed
+        HOST_PORT = "8090"    // change if needed
         CONTAINER_PORT = "80"
     }
 
