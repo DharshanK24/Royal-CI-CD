@@ -1,27 +1,69 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "roadster-website"
+        CONTAINER_NAME = "roadster-container"
+        HOST_PORT = "8081"     // change if needed
+        CONTAINER_PORT = "80"
+    }
+
     stages {
-        stage('Checkout') {
+
+        stage('Checkout Code') {
             steps {
-                git 'https://github.com/DharshanK24/Royal-CI-CD.git'
+                git branch: 'main', 
+                    url: 'https://github.com/DharshanK24/Royal-CI-CD.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t roadster-website .'
+                script {
+                    sh """
+                    docker build -t ${IMAGE_NAME}:latest .
+                    """
+                }
             }
         }
 
-        stage('Deploy Container') {
+        stage('Stop Old Container') {
             steps {
-                sh '''
-                docker stop roadster-container || true
-                docker rm roadster-container || true
-                docker run -d -p 80:80 --name roadster-container roadster-website
-                '''
+                script {
+                    sh """
+                    docker stop ${CONTAINER_NAME} || true
+                    docker rm ${CONTAINER_NAME} || true
+                    """
+                }
             }
+        }
+
+        stage('Run New Container') {
+            steps {
+                script {
+                    sh """
+                    docker run -d \
+                    -p ${HOST_PORT}:${CONTAINER_PORT} \
+                    --name ${CONTAINER_NAME} \
+                    ${IMAGE_NAME}:latest
+                    """
+                }
+            }
+        }
+
+        stage('Cleanup Dangling Images') {
+            steps {
+                sh 'docker image prune -f'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Deployment Successful!"
+        }
+        failure {
+            echo "❌ Pipeline Failed!"
         }
     }
 }
